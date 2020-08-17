@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/substrate-front-end-template/static/js/main.e447989b.chunk.js",
+    "main.js.map": "/substrate-front-end-template/static/js/main.e447989b.chunk.js.map",
+    "runtime-main.js": "/substrate-front-end-template/static/js/runtime-main.861c05a0.js",
+    "runtime-main.js.map": "/substrate-front-end-template/static/js/runtime-main.861c05a0.js.map",
+    "static/css/2.1e97c730.chunk.css": "/substrate-front-end-template/static/css/2.1e97c730.chunk.css",
+    "static/js/2.3bbab623.chunk.js": "/substrate-front-end-template/static/js/2.3bbab623.chunk.js",
+    "static/js/2.3bbab623.chunk.js.map": "/substrate-front-end-template/static/js/2.3bbab623.chunk.js.map",
+    "index.html": "/substrate-front-end-template/index.html",
+    "precache-manifest.871f3c8a8289dc147646e21f5f1c6c1e.js": "/substrate-front-end-template/precache-manifest.871f3c8a8289dc147646e21f5f1c6c1e.js",
+    "service-worker.js": "/substrate-front-end-template/service-worker.js",
+    "static/css/2.1e97c730.chunk.css.map": "/substrate-front-end-template/static/css/2.1e97c730.chunk.css.map",
+    "static/media/semantic.min.css": "/substrate-front-end-template/static/media/outline-icons.ef60a4f6.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.861c05a0.js",
+    "static/css/2.1e97c730.chunk.css",
+    "static/js/2.3bbab623.chunk.js",
+    "static/js/main.e447989b.chunk.js"
+  ]
+}
