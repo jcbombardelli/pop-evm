@@ -1,0 +1,9 @@
+POST http://127.0.0.1:8545 HTTP/1.1
+content-type: application/json
+
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "method":"eth_getBlockByNumber",
+  "params": ["0xa",false]
+}

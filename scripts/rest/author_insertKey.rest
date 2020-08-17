@@ -1,0 +1,13 @@
+POST http://127.0.0.1:8545 HTTP/1.1
+content-type: application/json
+
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "method":"author_insertKey",
+  "params": [
+    "gran",
+    "arctic swift party slot limb cradle vast dentist fade tired life metal",
+    "0x02657cfd7f4c362cbb9835368a6e670ab4f897437f648d97ba370d6525b6109063"
+  ]
+}
