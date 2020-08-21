@@ -140,6 +140,8 @@ pub fn new_full_params(config: Configuration, manual_seal: bool) -> Result<(
 	let finality_proof_provider =
 		Arc::new(GrandpaFinalityProofProvider::new(backend.clone(), provider));
 
+	println!("Log: Frontier>Tempalte>Node>src>service.rs ---> Passando pelo  finality_proof_provider 1");
+
 
 	let params = sc_service::ServiceParams {
 		backend, client, import_queue, keystore, task_manager, transaction_pool, rpc_extensions_builder,
@@ -341,6 +343,8 @@ pub fn new_light(config: Configuration) -> Result<TaskManager, ServiceError> {
 
 	let finality_proof_provider =
 		Arc::new(GrandpaFinalityProofProvider::new(backend.clone(), client.clone() as Arc<_>));
+
+	println!("Log: Frontier>Tempalte>Node>src>service.rs ---> Passando pelo  finality_proof_provider 2");
 
 	sc_service::build(sc_service::ServiceParams {
 		block_announce_validator_builder: None,

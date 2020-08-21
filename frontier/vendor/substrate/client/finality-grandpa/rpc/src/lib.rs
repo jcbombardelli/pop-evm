@@ -64,6 +64,7 @@ where
 	AuthoritySet: ReportAuthoritySet + Send + Sync + 'static,
 {
 	fn round_state(&self) -> FutureResult<ReportedRoundStates> {
+		println!("Log: Vendor>Substrate>Client>finality-grandpa>rpc>src>lib.rs ---> Iniciando o round_state  {}", round_state);
 		let round_states = ReportedRoundStates::from(&self.authority_set, &self.voter_state);
 		let future = async move { round_states }.boxed();
 		Box::new(future.map_err(jsonrpc_core::Error::from).compat())
@@ -83,6 +84,7 @@ mod tests {
 	struct EmptyVoterState;
 
 	fn voters() -> HashSet<AuthorityId> {
+		println!("Log: Vendor>Substrate>Client>finality-grandpa>rpc>src>lib.rs ---> Iniciando o voters");
 		let voter_id_1 = AuthorityId::from_slice(&[1; 32]);
 		let voter_id_2 = AuthorityId::from_slice(&[2; 32]);
 
@@ -135,6 +137,7 @@ mod tests {
 
 	#[test]
 	fn uninitialized_rpc_handler() {
+		println!("Log: Vendor>Substrate>Client>finality-grandpa>rpc>src>lib.rs ---> Iniciando o uninitialized_rpc_handler");
 		let handler = GrandpaRpcHandler::new(TestAuthoritySet, EmptyVoterState);
 		let mut io = IoHandler::new();
 		io.extend_with(GrandpaApi::to_delegate(handler));
@@ -147,6 +150,8 @@ mod tests {
 
 	#[test]
 	fn working_rpc_handler() {
+
+		println!("Log: Vendor>Substrate>Client>finality-grandpa>rpc>src>lib.rs ---> Iniciando o working_rpc_handler");
 		let handler = GrandpaRpcHandler::new(TestAuthoritySet, TestVoterState);
 		let mut io = IoHandler::new();
 		io.extend_with(GrandpaApi::to_delegate(handler));

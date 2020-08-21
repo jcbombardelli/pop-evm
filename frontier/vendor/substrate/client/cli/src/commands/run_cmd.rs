@@ -271,6 +271,8 @@ impl RunCmd {
 	pub fn get_keyring(&self) -> Option<sp_keyring::Sr25519Keyring> {
 		use sp_keyring::Sr25519Keyring::*;
 
+		println!("Log: Vendor>Substrate>Client>Cli>Src>commands>run_cmd.rs ---> Iniciando o get_keyring");
+
 		if self.alice {
 			Some(Alice)
 		} else if self.bob {
@@ -295,6 +297,7 @@ impl RunCmd {
 
 impl CliConfiguration for RunCmd {
 	fn shared_params(&self) -> &SharedParams {
+		println!("Log: Vendor>Substrate>Client>Cli>Src>commands>run_cmd.rs ---> Iniciando o shared_params");
 		&self.shared_params
 	}
 

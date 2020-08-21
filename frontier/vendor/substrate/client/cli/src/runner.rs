@@ -25,11 +25,11 @@ use futures::pin_mut;
 use futures::select;
 use futures::{future, future::FutureExt, Future};
 use log::info;
-use sc_service::{Configuration, TaskType, TaskManager};
+use sc_client_api::{BlockBackend, StorageProvider, UsageProvider};
+use sc_service::{Configuration, TaskManager, TaskType};
 use sp_runtime::traits::{Block as BlockT, Header as HeaderT};
 use sp_utils::metrics::{TOKIO_THREADS_ALIVE, TOKIO_THREADS_TOTAL};
 use std::{fmt::Debug, marker::PhantomData, str::FromStr, sync::Arc};
-use sc_client_api::{UsageProvider, BlockBackend, StorageProvider};
 
 #[cfg(target_family = "unix")]
 async fn main<F, E>(func: F) -> std::result::Result<(), Box<dyn std::error::Error>>
@@ -126,13 +126,11 @@ impl<C: SubstrateCli> Runner<C> {
 		let tokio_runtime = build_runtime()?;
 		let runtime_handle = tokio_runtime.handle().clone();
 
-		let task_executor = move |fut, task_type| {
-			match task_type {
-				TaskType::Async => runtime_handle.spawn(fut).map(drop),
-				TaskType::Blocking =>
-					runtime_handle.spawn_blocking(move || futures::executor::block_on(fut))
-						.map(drop),
-			}
+		let task_executor = move |fut, task_type| match task_type {
+			TaskType::Async => runtime_handle.spawn(fut).map(drop),
+			TaskType::Blocking => runtime_handle
+				.spawn_blocking(move || futures::executor::block_on(fut))
+				.map(drop),
 		};
 
 		Ok(Runner {
@@ -174,32 +172,41 @@ impl<C: SubstrateCli> Runner<C> {
 		info!("📋 Chain specification: {}", self.config.chain_spec.name());
 		info!("🏷  Node name: {}", self.config.network.node_name);
 		info!("👤 Role: {}", self.config.display_role());
-		info!("💾 Database: {} at {}",
+		info!(
+			"💾 Database: {} at {}",
 			self.config.database,
-			self.config.database.path().map_or_else(|| "<unknown>".to_owned(), |p| p.display().to_string())
+			self.config
+				.database
+				.path()
+				.map_or_else(|| "<unknown>".to_owned(), |p| p.display().to_string())
 		);
-		info!("⛓  Native runtime: {}", C::native_runtime_version(&self.config.chain_spec));
+		info!(
+			"⛓  Native runtime: {}",
+			C::native_runtime_version(&self.config.chain_spec)
+		);
 	}
 
 	/// A helper function that runs a future with tokio and stops if the process receives the signal
 	/// `SIGTERM` or `SIGINT`.
-	pub fn run_subcommand<BU, B, BA, IQ, CL>(self, subcommand: &Subcommand, builder: BU)
-		-> Result<()>
+	pub fn run_subcommand<BU, B, BA, IQ, CL>(
+		self,
+		subcommand: &Subcommand,
+		builder: BU,
+	) -> Result<()>
 	where
-		BU: FnOnce(Configuration)
-			-> sc_service::error::Result<(Arc<CL>, Arc<BA>, IQ, TaskManager)>,
+		BU: FnOnce(Configuration) -> sc_service::error::Result<(Arc<CL>, Arc<BA>, IQ, TaskManager)>,
 		B: BlockT + for<'de> serde::Deserialize<'de>,
 		BA: sc_client_api::backend::Backend<B> + 'static,
 		IQ: sc_service::ImportQueue<B> + 'static,
 		<B as BlockT>::Hash: FromStr,
 		<<B as BlockT>::Hash as FromStr>::Err: Debug,
 		<<<B as BlockT>::Header as HeaderT>::Number as FromStr>::Err: Debug,
-		CL: UsageProvider<B> + BlockBackend<B> + StorageProvider<B, BA> + Send + Sync +
-		'static,
+		CL: UsageProvider<B> + BlockBackend<B> + StorageProvider<B, BA> + Send + Sync + 'static,
 	{
 		let chain_spec = self.config.chain_spec.cloned_box();
 		let network_config = self.config.network.clone();
 		let db_config = self.config.database.clone();
+		println!("Log: Vendor>Substrate>Client>Cli>Src>Runner.rs ---> Iniciando o run_subcommand");
 
 		match subcommand {
 			Subcommand::BuildSpec(cmd) => cmd.run(chain_spec, network_config),
@@ -209,21 +216,33 @@ impl<C: SubstrateCli> Runner<C> {
 			}
 			Subcommand::ImportBlocks(cmd) => {
 				let (client, _, import_queue, task_manager) = builder(self.config)?;
-				run_until_exit(self.tokio_runtime, cmd.run(client, import_queue), task_manager)
+				run_until_exit(
+					self.tokio_runtime,
+					cmd.run(client, import_queue),
+					task_manager,
+				)
 			}
 			Subcommand::CheckBlock(cmd) => {
 				let (client, _, import_queue, task_manager) = builder(self.config)?;
-				run_until_exit(self.tokio_runtime, cmd.run(client, import_queue), task_manager)
+				run_until_exit(
+					self.tokio_runtime,
+					cmd.run(client, import_queue),
+					task_manager,
+				)
 			}
 			Subcommand::Revert(cmd) => {
 				let (client, backend, _, task_manager) = builder(self.config)?;
 				run_until_exit(self.tokio_runtime, cmd.run(client, backend), task_manager)
-			},
+			}
 			Subcommand::PurgeChain(cmd) => cmd.run(db_config),
 			Subcommand::ExportState(cmd) => {
 				let (client, _, _, task_manager) = builder(self.config)?;
-				run_until_exit(self.tokio_runtime, cmd.run(client, chain_spec), task_manager)
-			},
+				run_until_exit(
+					self.tokio_runtime,
+					cmd.run(client, chain_spec),
+					task_manager,
+				)
+			}
 		}
 	}
 
@@ -233,9 +252,13 @@ impl<C: SubstrateCli> Runner<C> {
 		mut self,
 		initialise: impl FnOnce(Configuration) -> sc_service::error::Result<TaskManager>,
 	) -> Result<()> {
+		println!(
+			"Log: Vendor>Substrate>Client>Cli>Src>Runner.rs ---> Iniciando o run_node_until_exit"
+		);
 		self.print_node_infos();
 		let mut task_manager = initialise(self.config)?;
-		self.tokio_runtime.block_on(main(task_manager.future().fuse()))
+		self.tokio_runtime
+			.block_on(main(task_manager.future().fuse()))
 			.map_err(|e| e.to_string())?;
 		self.tokio_runtime.block_on(task_manager.clean_shutdown());
 		Ok(())
@@ -249,7 +272,8 @@ impl<C: SubstrateCli> Runner<C> {
 	/// A helper function that runs a future with tokio and stops if the process receives
 	/// the signal SIGTERM or SIGINT
 	pub fn async_run<FUT>(
-		self, runner: impl FnOnce(Configuration) -> Result<(FUT, TaskManager)>,
+		self,
+		runner: impl FnOnce(Configuration) -> Result<(FUT, TaskManager)>,
 	) -> Result<()>
 	where
 		FUT: Future<Output = Result<()>>,

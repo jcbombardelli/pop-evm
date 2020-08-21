@@ -158,7 +158,7 @@ where
 	pub fn push(&mut self, xt: <Block as BlockT>::Extrinsic) -> Result<(), ApiErrorFor<A, Block>> {
 		let block_id = &self.block_id;
 		let extrinsics = &mut self.extrinsics;
-
+		println!("Log: Vendor>Substrate>Client>block-builder>src>lib.rs ---> push ");
 		self.api.execute_in_transaction(|api| {
 			match api.apply_extrinsic_with_context(
 				block_id,

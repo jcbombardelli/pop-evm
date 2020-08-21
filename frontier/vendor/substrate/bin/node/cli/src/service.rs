@@ -381,6 +381,8 @@ pub fn new_light_base(config: Configuration) -> Result<(
 	let finality_proof_provider =
 		Arc::new(GrandpaFinalityProofProvider::new(backend.clone(), provider));
 
+	println!("Log: Frontier>Tempalte>Node>src>service.rs ---> Passando pelo  finality_proof_provider 3");
+
 	let light_deps = node_rpc::LightDeps {
 		remote_blockchain: backend.remote_blockchain(),
 		fetcher: on_demand.clone(),

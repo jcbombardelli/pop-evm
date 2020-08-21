@@ -175,6 +175,7 @@ macro_rules! substrate_cli_subcommands {
 			}
 
 			fn role(&self, is_dev: bool) -> $crate::Result<::sc_service::Role> {
+				println!("Log: Vendor>Substrate>Client>Cli>Src>commands>mod.rs ---> Iniciando o fn role {}", is_dev);
 				match self {
 					$($enum::$variant(cmd) => cmd.role(is_dev)),*
 				}
@@ -182,6 +183,7 @@ macro_rules! substrate_cli_subcommands {
 
 			fn transaction_pool(&self)
 			-> $crate::Result<::sc_service::config::TransactionPoolOptions> {
+				println!("Log: Vendor>Substrate>Client>Cli>Src>commands>mod.rs ---> Iniciando o transaction_pool");
 				match self {
 					$($enum::$variant(cmd) => cmd.transaction_pool()),*
 				}

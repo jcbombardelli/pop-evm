@@ -516,7 +516,7 @@ pub fn generate_node_name() -> String {
 		let count = node_name.chars().count();
 
 		if count < NODE_NAME_MAX_LENGTH {
-			let mut pop_string: String = "pop-".to_owned();
+			let pop_string: String = "pop-".to_owned();
    			return [pop_string, node_name].concat();
 		}
 	}

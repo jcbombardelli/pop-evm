@@ -38,6 +38,8 @@ pub trait AuraInherentData {
 
 impl AuraInherentData for InherentData {
 	fn aura_inherent_data(&self) ->Result<InherentType, Error> {
+		//println!("Log: Vendor>Substrate>Primitives>Consensus>aura>src>inherents.rs ---> Iniciando o aura_inherent_data");
+		//NAO FUNCIONA
 		self.get_data(&INHERENT_IDENTIFIER)
 			.and_then(|r| r.ok_or_else(|| "Aura inherent data not found".into()))
 	}

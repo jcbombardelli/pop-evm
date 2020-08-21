@@ -304,6 +304,7 @@ impl InherentDataProviders {
 	/// Create inherent data.
 	pub fn create_inherent_data(&self) -> Result<InherentData, Error> {
 		let mut data = InherentData::new();
+		println!("Log: Vendor>Substrate>Primitives>inherenth>src>lib.rs ---> Iniciando o propose");
 		self.providers.read().iter().try_for_each(|p| {
 			p.provide_inherent_data(&mut data)
 				.map_err(|e| format!("Error for `{:?}`: {:?}", p.inherent_identifier(), e))

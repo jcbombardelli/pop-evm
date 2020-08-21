@@ -129,6 +129,7 @@ impl SlotCompatible for AuraSlotCompatible {
 		&self,
 		data: &InherentData
 	) -> Result<(TimestampInherent, AuraInherent, std::time::Duration), sp_consensus::Error> {
+		println!("Log: Vendor>Substrate>Primitives>Consensus>aura>src>lib.rs ---> Iniciando o extract_timestamp_and_slot");
 		data.timestamp_inherent_data()
 			.and_then(|t| data.aura_inherent_data().map(|a| (t, a)))
 			.map_err(Into::into)
@@ -173,6 +174,7 @@ pub fn start_aura<B, C, SC, E, I, P, SO, CAW, Error>(
 		force_authoring,
 		_key_type: PhantomData::<P>,
 	};
+	println!("Log: Vendor>Substrate>Client>Consensus>aura>src>lib.rs ---> Iniciando o start_aura");
 	register_aura_inherent_data_provider(
 		&inherent_data_providers,
 		slot_duration.slot_duration()

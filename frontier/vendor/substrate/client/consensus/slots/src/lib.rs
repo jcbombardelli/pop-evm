@@ -358,6 +358,8 @@ where
 {
 	let SlotDuration(slot_duration) = slot_duration;
 
+	
+
 	// rather than use a timer interval, we schedule our waits ourselves
 	Slots::<SC>::new(
 		slot_duration.slot_duration(),
@@ -372,6 +374,7 @@ where
 			}
 
 			let slot_num = slot_info.number;
+			println!("Log: Vendor>Substrate>Client>Consensus>slot>src>lib.rs ---> Iniciando o slot_num  {}", slot_num);
 			let chain_head = match client.best_chain() {
 				Ok(x) => x,
 				Err(e) => {
@@ -400,6 +403,7 @@ where
 				)
 			}
 		}).then(|res| {
+			println!("Log: Vendor>Substrate>Client>Consensus>slot>src>lib.rs ---> Iniciando o |res|", );
 			if let Err(err) = res {
 				warn!(target: "slots", "Slots stream terminated with an error: {:?}", err);
 			}

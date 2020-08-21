@@ -62,6 +62,7 @@ pub async fn finalize_block<B, F, CB>(params: FinalizeBlockParams<B, F, CB>)
 			rpc::send_result(&mut sender, Err(e.into()))
 		}
 		Ok(()) => {
+			println!("Log: Vendor>Substrate>Client>consensus>manual-seal>src>finalize_blocks.rs ---> finalize_block ");
 			log::info!("✅ Successfully finalized block: {}", hash);
 			rpc::send_result(&mut sender, Ok(()))
 		}

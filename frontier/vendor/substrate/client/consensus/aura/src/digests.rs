@@ -50,6 +50,7 @@ impl<P, Hash> CompatibleDigestItem<P> for DigestItem<Hash> where
 	Hash: Debug + Send + Sync + Eq + Clone + Codec + 'static
 {
 	fn aura_seal(signature: Signature<P>) -> Self {
+		println!("Log: Vendor>Substrate>Client>Consensus>Aura>src>digest.rs ---> Iniciando o aura_seal");
 		DigestItem::Seal(AURA_ENGINE_ID, signature.encode())
 	}
 

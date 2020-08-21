@@ -91,6 +91,7 @@ impl<BE, Block: BlockT> AuthoritySetForFinalityProver<Block> for Arc<dyn Storage
 {
 	fn authorities(&self, block: &BlockId<Block>) -> ClientResult<AuthorityList> {
 		let storage_key = StorageKey(GRANDPA_AUTHORITIES_KEY.to_vec());
+		println!("Log: Vendor>Substrate>Client>finality-grandpa>src>finallity_proof.rs ---> Iniciando o authorities");
 		self.storage(block, &storage_key)?
 			.and_then(|encoded| VersionedAuthorityList::decode(&mut encoded.0.as_slice()).ok())
 			.map(|versioned| versioned.into())
