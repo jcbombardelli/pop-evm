@@ -6,8 +6,8 @@
   "telemetryEndpoints": null,
   "protocolId": null,
   "properties": {
-    "tokenDecimals": 2,
-    "tokenSymbol": "POP"
+    "tokenDecimals": 3,
+    "tokenSymbol": "N-POP"
   },
   "consensusEngine": null,
   "genesis": {
@@ -18,18 +18,18 @@
       },
       "aura": {
         "authorities": [
-          "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
-          "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty"
+          "5CvyUzywgfyuYyNpRAgW5pQVsDQdjYhjShH28aKswgmY3NT7",
+          "5E9c67edXpHBuRPcqab79usQRjoEWKGZJQsbFGw73ppECqop"
         ]
       },
       "grandpa": {
         "authorities": [
           [
-            "5FA9nQDVg267DEd8m1ZypXLBnvN7SFxYwV7ndqSYGiN9TTpu",
+            "5FKkg2RDhifjr5kLR1QAb3Jz65ZVdcx5ZjBQNLmoMwfCyt4z",
             1
           ],
           [
-            "5GoNkf6WdbxCFnPdAnYYQyCjAKPJgLNxXwPjwTh6DGg6gN3E",
+            "5H6j4MrXYy9PB8bSrsVV2aum1AoiBjyYvxNt9ko5KzGAFWJ2",
             1
           ]
         ]
@@ -37,57 +37,17 @@
       "balances": {
         "balances": [
           [
-            "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
+            "5CvyUzywgfyuYyNpRAgW5pQVsDQdjYhjShH28aKswgmY3NT7",
             1152921504606846976
           ],
           [
-            "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty",
-            1152921504606846976
-          ],
-          [
-            "5FLSigC9HGRKVhB9FiEo4Y3koPsNmBmLJbpXg2mp1hXcS59Y",
-            1152921504606846976
-          ],
-          [
-            "5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy",
-            1152921504606846976
-          ],
-          [
-            "5HGjWAeFDfFCWPsjFQdVV2Msvz2XtMktvgocEZcCj68kUMaw",
-            1152921504606846976
-          ],
-          [
-            "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL",
-            1152921504606846976
-          ],
-          [
-            "5GNJqTPyNqANBkUVMN1LPPrxXnFouWXoe2wNSmmEoLctxiZY",
-            1152921504606846976
-          ],
-          [
-            "5HpG9w8EBLe5XCrbczpwq5TSXvedjrBGCwqxK1iQ7qUsSWFc",
-            1152921504606846976
-          ],
-          [
-            "5Ck5SLSHYac6WFt5UZRSsdJjwmpSZq85fd5TRNAdZQVzEAPT",
-            1152921504606846976
-          ],
-          [
-            "5HKPmK9GYtE1PSLsS1qiYU9xQ9Si1NcEhdeCq9sw5bqu4ns8",
-            1152921504606846976
-          ],
-          [
-            "5FCfAonRZgTFrTd9HREEyeJjDpT397KMzizE6T3DvebLFE7n",
-            1152921504606846976
-          ],
-          [
-            "5CRmqmsiNFExV6VbdmPJViVxrWmkaXXvBrSX8oqBT8R9vmWk",
+            "5E9c67edXpHBuRPcqab79usQRjoEWKGZJQsbFGw73ppECqop",
             1152921504606846976
           ]
         ]
       },
       "sudo": {
-        "key": "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
+        "key": "5CvyUzywgfyuYyNpRAgW5pQVsDQdjYhjShH28aKswgmY3NT7"
       },
       "ethereum": {},
       "evm": {

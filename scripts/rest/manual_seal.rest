@@ -1,0 +1,22 @@
+### Manual Seal
+POST http://127.0.0.1:8545 HTTP/1.1
+content-type: application/json
+
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "method":"engine_createBlock",
+  "params": [true, false, null]
+}
+
+
+### Finalize Block
+POST http://127.0.0.1:9935 HTTP/1.1
+content-type: application/json
+
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "method":"engine_finalizeBlock",
+  "params": ["0x8ac5bdb387f55ea2a637d0c8d7899a838d33165752f9322d47dedbbf18b6170a", null]
+}
