@@ -5,5 +5,5 @@ content-type: application/json
   "jsonrpc":"2.0",
   "id":1,
   "method":"eth_getBlockByNumber",
-  "params": ["0xa",false]
+  "params": ["0x0",false]
 }

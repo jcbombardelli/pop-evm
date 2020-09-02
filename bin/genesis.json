@@ -4,10 +4,10 @@
   "chainType": "Live",
   "bootNodes": [],
   "telemetryEndpoints": null,
-  "protocolId": null,
+  "protocolId": "pop0",
   "properties": {
-    "tokenDecimals": 3,
-    "tokenSymbol": "N-POP"
+    "tokenDecimals": 18,
+    "tokenSymbol": "NPOP"
   },
   "consensusEngine": null,
   "genesis": {
